@@ -36,7 +36,7 @@ RUN microdnf install openssl curl ca-certificates ${JAVA_PACKAGE} \
     && echo "securerandom.source=file:/dev/urandom" >> /etc/alternatives/jre/lib/security/java.security
 
 # Configure the JAVA_OPTIONS, you can add -XshowSettings:vm to also display the heap size.
-ENV JAVA_OPTIONS="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager -Dsnmp.listen-address=udp:0.0.0.0/1162 -Dsnmp.pravega.controller-uri=tcp://host.docker.internal:9090"
+ENV JAVA_OPTIONS="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager -Dsnmp.listen-address=udp:0.0.0.0/1162 -Dquarkus.kubernetes-config.enabled=true -Dquarkus.kubernetes-config.namespace=alerts -Dquarkus.kubernetes-config.config-maps=snmp-trap-handler"
 
 COPY target/lib/* /deployments/lib/
 COPY target/*-runner.jar /deployments/app.jar
