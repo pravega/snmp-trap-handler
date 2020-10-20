@@ -13,6 +13,11 @@
 #
 # docker run -i --rm -p 8080:8080 -p 162:162/udp pravega/snmp-trap-handler
 #
+# For deployment to SDP, use:
+#
+# docker build -f src/main/docker/Dockerfile.jvm -t devops-repo.isus.emc.com:8116/pravega/snmp-trap-handler .
+# docker push devops-repo.isus.emc.com:8116/pravega/snmp-trap-handler
+#
 ###
 FROM registry.access.redhat.com/ubi8/ubi-minimal:8.1
 
@@ -36,7 +41,7 @@ RUN microdnf install openssl curl ca-certificates ${JAVA_PACKAGE} \
     && echo "securerandom.source=file:/dev/urandom" >> /etc/alternatives/jre/lib/security/java.security
 
 # Configure the JAVA_OPTIONS, you can add -XshowSettings:vm to also display the heap size.
-ENV JAVA_OPTIONS="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager -Dsnmp.listen-address=udp:0.0.0.0/1162 -Dquarkus.kubernetes-config.enabled=true -Dquarkus.kubernetes-config.namespace=alerts -Dquarkus.kubernetes-config.config-maps=snmp-trap-handler"
+ENV JAVA_OPTIONS="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager -Dsnmp.listen-address=udp:0.0.0.0/1162 -Dquarkus.kubernetes-config.enabled=false -Dquarkus.kubernetes-config.namespace=alerts -Dquarkus.kubernetes-config.config-maps=snmp-trap-handler"
 
 COPY target/lib/* /deployments/lib/
 COPY target/*-runner.jar /deployments/app.jar
