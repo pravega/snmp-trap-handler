@@ -1,0 +1,35 @@
+{
+  "mappings": {
+    "properties": {
+      "securityModel": { "type": "integer" },
+      "securityLevel": { "type": "integer" },
+      "securityName": { "type": "text" },
+      "peerAddress": { "type": "ip" },
+      "peerPort": { "type": "integer" },
+      "trap": {
+        "properties": {
+          "type": { "type": "keyword" },
+          "requestId": { "type": "long" },
+          "errorStatus": { "type": "integer" },
+          "errorIndex": { "type": "integer" },
+          "enterprise": { "type": "keyword" },
+          "agentAddress": { "type": "ip" },
+          "genericTrap": { "type": "keyword" },
+          "specificTrap": { "type": "keyword" },
+          "timestamp": { "type": "long" },
+          "contextEngineId": { "type": "keyword" },
+          "contextName": { "type": "keyword" },
+          "variableBindings": {
+            "type": "nested",
+            "properties": {
+              "oid": { "type": "keyword" },
+              "name": { "type": "text" },
+              "value": { "type": "text" }
+            }
+          }
+        }
+      },
+      "messageProcessingModel": { "type": "integer" }
+    }
+  }
+}
