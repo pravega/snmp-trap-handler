@@ -20,4 +20,9 @@ public class VarBind {
 	 */
 	public String value;
 
+	/**
+	 * Name of named-value or OID, if value is an enumerated integer or an OID.
+	 */
+	public String namedValue;
+
 }
