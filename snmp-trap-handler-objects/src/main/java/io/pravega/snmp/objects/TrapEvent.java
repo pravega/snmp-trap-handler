@@ -1,5 +1,7 @@
 package io.pravega.snmp.objects;
 
+import java.time.Instant;
+
 /**
  * A received SNMP Trap event.
  */
@@ -58,5 +60,14 @@ public class TrapEvent {
 	 * 0 for SNMPv1, 1 for SNMPv2c, 2 for SNMPv2u and SNMPv2*, 3 for SNMPv3.
 	 */
 	public int messageProcessingModel;
+
+	/**
+	 * Milliseconds since epoch of when Trap was received.
+	 */
+	public Long receivedTimestamp;
+
+	public TrapEvent() {
+		receivedTimestamp = Instant.now().toEpochMilli();
+	}
 
 }
