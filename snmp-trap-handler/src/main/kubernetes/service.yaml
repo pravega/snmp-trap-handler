@@ -5,6 +5,7 @@ metadata:
   name: snmp-trap-handler-service
 spec:
   type: LoadBalancer
+  externalTrafficPolicy: Local
   selector:
     app: snmp-trap-handler
   ports:
