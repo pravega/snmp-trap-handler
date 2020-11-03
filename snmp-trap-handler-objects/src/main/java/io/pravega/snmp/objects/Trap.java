@@ -1,5 +1,6 @@
 package io.pravega.snmp.objects;
 
+import java.time.Instant;
 import java.util.List;
 
 /**
@@ -31,5 +32,14 @@ public class Trap {
 	public String contextName;
 
 	public List<VarBind> variableBindings;
+
+	/**
+	 * Milliseconds since epoch of when Trap was received.
+	 */
+	public Long receivedTimestamp;
+
+	public Trap() {
+		receivedTimestamp = Instant.now().toEpochMilli();
+	}
 
 }
