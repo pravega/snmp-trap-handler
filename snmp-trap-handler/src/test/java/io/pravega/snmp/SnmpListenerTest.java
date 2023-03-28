@@ -20,6 +20,8 @@ import java.util.UUID;
 
 import javax.inject.Inject;
 
+import org.eclipse.microprofile.config.ConfigProvider;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -66,7 +68,7 @@ public class SnmpListenerTest {
 
 	@BeforeAll
 	public static void createReaderGroupAndReader() throws Exception {
-		controllerURI = URI.create(System.getProperty("pravega.controller-uri"));
+		controllerURI = URI.create(ConfigProvider.getConfig().getValue("pravega.controller-uri", String.class));
 		ClientConfig clientConfig = ClientConfig.builder()
 				.controllerURI(controllerURI)
 				.build();
